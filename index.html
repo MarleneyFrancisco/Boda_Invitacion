@@ -52,9 +52,10 @@
         .open .envelope-paper { transform: translateY(-100px); z-index: 4; }
         .hide-screen { opacity: 0; visibility: hidden; }
 
-        /* --- ESTILO PARA EL ENCABEZADO (CARRUSEL PRINCIPAL ACTUALIZADO CON 6 FOTOS) --- */
+        /* --- ESTILO PARA EL ENCABEZADO (CARRUSEL PRINCIPAL CON 6 FOTOS) --- */
         header { position: relative; overflow: hidden; color: #ffffff; padding: 0; border-bottom: 1px solid #e0d8c3; height: 100vh; }
         .slider-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-color: #000; }
+        
         /* Animación extendida a 30s para acomodar 6 imágenes */
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center center; opacity: 0; animation: fadeSlide 30s infinite; }
         
@@ -286,7 +287,7 @@
         .info-card { background: white; padding: 30px; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
         .info-card-img { width: 100%; height: auto; max-height: 250px; border-radius: 8px; margin-bottom: 20px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        .btn-rsvp { background-color: #bca371; color: white; padding: 15px 30px; text-decoration: none; border-radius: 30px; font-size: 1.1rem; transition: background 0.3s; display: inline-block; margin-top: 20px; font-weight: 600; }
+        .btn-rsvp { background-color: #bca371; color: white; padding: 15px 30px; text-decoration: none; border-radius: 30px; font-size: 1.1rem; transition: background 0.3s; display: inline-block; margin: 10px; font-weight: 600; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif;}
         .btn-rsvp:hover { background-color: #a68d5d; transform: scale(1.05); }
         .btn-map { background-color: transparent; color: #bca371; border: 2px solid #bca371; padding: 10px 20px; text-decoration: none; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s ease; display: inline-block; margin-top: 15px; font-weight: 600; }
         .btn-map:hover { background-color: #bca371; color: white; }
@@ -309,7 +310,7 @@
         /* --- ESTILOS PREMIUM PARA LA MESA DE REGALOS --- */
         .registry-grid {
             display: flex;
-            justify-content: center; /* Centrado desde que solo queda 1 tarjeta */
+            justify-content: center; /* Centrado */
             gap: 20px;
             margin-top: 30px;
             flex-wrap: wrap;
@@ -327,6 +328,7 @@
             justify-content: space-between;
             align-items: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
         }
         .registry-card:hover {
             transform: translateY(-5px);
@@ -379,6 +381,7 @@
             margin-bottom: 12px;
             display: inline-block;
             box-shadow: 0 4px 10px rgba(188, 163, 113, 0.2);
+            font-family: 'Montserrat', sans-serif;
         }
         .btn-registry-primary:hover {
             background-color: #a68d5d;
@@ -400,6 +403,7 @@
             align-items: center;
             justify-content: center;
             gap: 5px;
+            font-family: 'Montserrat', sans-serif;
         }
         .btn-registry-secondary:hover {
             background-color: #f7f5f0;
@@ -494,7 +498,8 @@
             
             <div class="history-carousel-container" id="historyCarousel">
                 <div class="history-slide active">
-                    <img src="https://dl.dropboxusercontent.com/scl/fi/35n9ws8jwgqkalhhc7oky/WhatsApp-Image-2026-03-20-at-4.04.03-PM.jpeg?rlkey=wrvxpzbx377qymlvof1sl570j&st=d7ovtfid" alt="Momento 1">
+                    <!-- NOTA: He aplicado object-position: center 10%; para subir el encuadre. Si prefieres alejar por completo la foto y verla entera tipo polaroid con fondo de color, puedes sustituir style="object-position: center 10%;" por style="object-fit: contain; background-color: #faf8f4;" -->
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/35n9ws8jwgqkalhhc7oky/WhatsApp-Image-2026-03-20-at-4.04.03-PM.jpeg?rlkey=wrvxpzbx377qymlvof1sl570j&st=d7ovtfid" alt="Momento 1" style="object-position: center 10%;">
                 </div>
                 <div class="history-slide">
                     <img src="https://dl.dropboxusercontent.com/scl/fi/yfs9z9omckqlade3qd6fm/WhatsApp-Image-2026-03-20-at-4.04.04-PM-1.jpeg?rlkey=xdq0qw2me9uvlfp7rgnfqxw1t&st=2al402fi" alt="Momento 2">
@@ -587,7 +592,7 @@
             
             <div class="calendar-container">
                 <h3>¡Guarda la fecha!</h3>
-                <a href="TU_LINK_DE_CALENDARIO_O_ICS_AQUI" target="_blank" class="btn-calendar">📅 Agregar a mi Calendario</a>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Marlene+%26+Francisco&dates=20261009T180000Z/20261010T070000Z&details=%C2%A1Acomp%C3%A1%C3%B1anos+a+celebrar+nuestra+boda%21&location=Puerto+Vallarta%2C+Jal." target="_blank" class="btn-calendar">📅 Agregar a mi Calendario</a>
             </div>
 
             <h2>La Ceremonia</h2>
@@ -608,7 +613,7 @@
                 <a href="https://maps.app.goo.gl/LH418iAz6vvnszkg9" target="_blank" class="btn-map">📍 Ver en Google Maps</a>
             </div>
 
-            <!-- TARJETA DEL CÓDIGO DE VESTIMENTA (CON TU IMAGEN DE DISEÑO) -->
+            <!-- TARJETA DEL CÓDIGO DE VESTIMENTA -->
             <div class="info-card" style="background-color: #fdfcf9; border: 1px solid #e0d8c3;">
                 <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #bca371; margin-top: 0; font-weight: normal; margin-bottom: 5px;">Código de Vestimenta</h3>
                 
@@ -617,7 +622,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN: MESA DE REGALOS PREMIUM LIVERPOOL (UNIFICADA) -->
+            <!-- SECCIÓN: MESA DE REGALOS PREMIUM LIVERPOOL -->
             <h2>Mesa de Regalos</h2>
             <p>Tu presencia en nuestra boda es el mejor regalo que podríamos recibir. Sin embargo, si deseas hacernos un detalle, te dejamos nuestra mesa de regalos oficial:</p>
             
@@ -630,148 +635,186 @@
                         <div class="code-highlight" id="code-event">51975199</div>
                     </div>
                     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-                        <!-- Botón directo a tu mesa de regalos en Liverpool -->
-                        <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51975199" target="_blank" class="btn-registry-primary">🎁 Ver Mesa de Regalos</a>
-                        <!-- Botón interactivo de Copiar Código -->
-                        <button class="btn-registry-secondary" onclick="copyValue('51975199', 'btn-copy-ev')" id="btn-copy-ev">
-                            <span>📋 Copiar Número</span>
-                        </button>
+                        <button class="btn-registry-primary" onclick="window.open('https://mesaderegalos.liverpool.com.mx/miseditados/buscarMesa?numeroEvento=51975199', '_blank')">Ir a la Mesa de Regalos</button>
+                        <button class="btn-registry-secondary" onclick="copiarCodigoEvento()"><span id="copy-icon">📋</span> Copiar Número de Evento</button>
                     </div>
                 </div>
             </div>
 
-            <br><br>
-            <h2>Comparte tus Recuerdos</h2>
-            <p>¡Ayúdanos a capturar cada instante! Sube las fotos y videos que tomes de nuestra boda a nuestra carpeta compartida.</p>
-            <a href="TU_LINK_DE_CARPETA_COMPARTIDA_AQUI" target="_blank" class="btn-rsvp">📸 Subir mis fotos</a>
-            
+            <!-- SECCIÓN: CONFIRMACIÓN DE ASISTENCIA (RSVP) -->
+            <h2>Confirmación de Asistencia</h2>
+            <p>Agradecemos confirmar tu asistencia antes del 01 de Septiembre de 2026 para coordinar todos los detalles de este gran día.</p>
+            <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <button class="btn-rsvp" onclick="confirmarWhatsApp('Marlene')">Confirmar con Marlene</button>
+                <button class="btn-rsvp" onclick="confirmarWhatsApp('Francisco')" style="background-color: #a68d5d;">Confirmar con Francisco</button>
+            </div>
+
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
-        <p>Hecho con ❤️ para nuestra familia y amigos.</p>
+        <p>Marlene & Francisco • 2026</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #bca371;">¡Nos vemos en el día más feliz de nuestras vidas!</p>
     </footer>
 
+    <!-- JAVASCRIPT: FUNCIONES DE INTERACCIÓN Y ANIMACIÓN -->
     <script>
-        // --- PERSONALIZACIÓN DEL SOBRE CON EL NOMBRE DEL INVITADO ---
-        document.addEventListener("DOMContentLoaded", function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var nombreInvitado = urlParams.get('invitado');
-            if (nombreInvitado) {
-                var papelSobre = document.getElementById('nombre-invitado');
-                papelSobre.innerHTML = nombreInvitado;
-                if (nombreInvitado.length > 15) { papelSobre.style.fontSize = '1.6rem'; }
+        // Cargar nombre del invitado desde los parámetros de la URL (?invitado=Familia Diaz)
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const invitado = params.get('invitado');
+            const wrapper = document.getElementById('nombre-invitado');
+            if (invitado) {
+                wrapper.innerHTML = decodeURIComponent(invitado);
+            } else {
+                wrapper.innerHTML = "M & F";
             }
         });
 
-        // --- CONTROL DEL SOBRE ---
+        // Control del Sobre e inicio de Audio
         function abrirInvitacion() {
-            var envelopeWrapper = document.querySelector('.envelope-wrapper');
-            var envelopeScreen = document.getElementById('envelope-screen');
-            var body = document.body;
-            envelopeWrapper.classList.add('open');
-            if (!isPlaying) { toggleMusic(); }
-            setTimeout(function() {
-                envelopeScreen.classList.add('hide-screen');
-                body.classList.remove('no-scroll');
-                startHistoryCarousel();
-            }, 1800);
+            const wrapper = document.querySelector('.envelope-wrapper');
+            const screen = document.getElementById('envelope-screen');
+            const audio = document.getElementById('bg-music');
+            const musicBtn = document.getElementById('music-btn');
+
+            // Ejecuta animación de apertura
+            wrapper.classList.add('open');
+
+            // Intenta reproducir el tema musical
+            audio.play().then(() => {
+                musicBtn.innerText = "⏸️";
+            }).catch(err => {
+                console.log("Autoplay bloqueado por el navegador. Se reproducirá con interacción.");
+            });
+
+            // Oculta la pantalla completa y rehabilita el desplazamiento
+            setTimeout(() => {
+                screen.classList.add('hide-screen');
+                document.body.classList.remove('no-scroll');
+            }, 2000);
         }
 
-        // --- CONTROL DE MÚSICA ---
-        var music = document.getElementById("bg-music");
-        var musicBtn = document.getElementById("music-btn");
-        var isPlaying = false;
-
+        // Control Play/Pause de la Música
         function toggleMusic() {
-            if (isPlaying) { music.pause(); musicBtn.innerHTML = "🎵"; }
-            else { music.play().catch(function(error) { console.log("Bloqueo de audio detectado"); }); musicBtn.innerHTML = "⏸️"; }
-            isPlaying = !isPlaying;
+            const audio = document.getElementById('bg-music');
+            const musicBtn = document.getElementById('music-btn');
+
+            if (audio.paused) {
+                audio.play();
+                musicBtn.innerText = "⏸️";
+            } else {
+                audio.pause();
+                musicBtn.innerText = "🎵";
+            }
         }
 
-        // --- Configuración de la Cuenta Regresiva ---
-        var weddingDate = new Date(2026, 9, 9); // Para JS 9 = Octubre 
-        function updateCountdown() {
-            var now = new Date(); var timeDifference = weddingDate - now;
-            if (timeDifference <= 0) { document.getElementById('countdown').innerHTML = "¡Es hoy! ¡Es hoy!"; return; }
-            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-            document.getElementById('days').innerHTML = days < 10 ? '0' + days : days;
-            document.getElementById('hours').innerHTML = hours < 10 ? '0' + hours : hours;
-            document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
+        // Cuenta Regresiva (Objetivo: 09 de Octubre de 2026 a las 13:00 hrs)
+        const targetDate = new Date("Oct 9, 2026 13:00:00").getTime();
+
+        function runCountdown() {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+
+            if (gap <= 0) {
+                document.getElementById('countdown').innerHTML = "<div style='font-size: 1.8rem; font-weight: bold;'>¡Hoy es el gran día! 🎉</div>";
+                return;
+            }
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
+
+            document.getElementById('days').innerText = String(d).padStart(2, '0');
+            document.getElementById('hours').innerText = String(h).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
         }
-        setInterval(updateCountdown, 1000); updateCountdown();
+        setInterval(runCountdown, 1000);
+        runCountdown();
 
-        // --- CONTROL DEL CARRUSEL DE HISTORIA (VOLTEO) ---
-        let historySlides = document.querySelectorAll('.history-slide');
-        let currentHistoryIndex = 0;
-        let historyInterval;
+        // Slider rotativo automático de la sección de "Nuestra Historia"
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.history-slide');
 
-        function showNextHistoryPhoto() {
-            let currentSlide = historySlides[currentHistoryIndex];
-            currentSlide.classList.add('exiting'); 
+        function rotateHistorySlides() {
+            const activeSlide = slides[currentSlide];
+            activeSlide.classList.remove('active');
+            activeSlide.classList.add('exiting');
 
-            currentHistoryIndex = (currentHistoryIndex + 1) % historySlides.length;
-            
-            let nextSlide = historySlides[currentHistoryIndex];
-            
+            currentSlide = (currentSlide + 1) % slides.length;
+
+            const nextSlide = slides[currentSlide];
             nextSlide.classList.remove('exiting');
-            nextSlide.classList.add('active'); 
+            nextSlide.classList.add('active');
 
-            currentSlide.classList.remove('active');
+            // Quita la clase 'exiting' cuando la transición de volteo finaliza
+            setTimeout(() => {
+                slides.forEach((slide, idx) => {
+                    if (idx !== currentSlide) {
+                        slide.classList.remove('exiting');
+                    }
+                });
+            }, 1000);
         }
+        // Cambio automático de foto cada 4 segundos
+        setInterval(rotateHistorySlides, 4000);
 
-        function startHistoryCarousel() {
-            historyInterval = setInterval(showNextHistoryPhoto, 4000);
-        }
-
-        // --- EFECTO DE REVELACIÓN POR SCROLL (ITINERARIO) ---
+        // Efecto scroll activo en la línea de tiempo del itinerario
         const itineraryItems = document.querySelectorAll('.itinerary-item');
-        
         window.addEventListener('scroll', () => {
-            const triggerBottom = window.innerHeight * 0.75; 
-            
+            const triggerBottom = window.innerHeight * 0.85;
             itineraryItems.forEach(item => {
                 const itemTop = item.getBoundingClientRect().top;
-                
                 if (itemTop < triggerBottom) {
-                    item.classList.add('active'); 
+                    item.classList.add('active');
                 } else {
-                    item.classList.remove('active'); 
+                    item.classList.remove('active');
                 }
             });
         });
 
-        // --- LÓGICA DE COPIADO INTELIGENTE (IFRAME SAFE) ---
-        function copyValue(valueToCopy, buttonId) {
-            var tempInput = document.createElement("input");
-            tempInput.value = valueToCopy;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            tempInput.setSelectionRange(0, 99999); 
+        // Copiar Código de Evento de Liverpool al Portapapeles
+        function copiarCodigoEvento() {
+            const codeText = "51975199";
+            const dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.value = codeText;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
 
-            try {
-                var success = document.execCommand("copy");
-                if (success) {
-                    var btn = document.getElementById(buttonId);
-                    var originalText = btn.innerHTML;
-                    btn.innerHTML = "✓ ¡Copiado con éxito!";
-                    btn.style.borderColor = "#bca371";
-                    btn.style.backgroundColor = "#fdfcf9";
-                    setTimeout(function() {
-                        btn.innerHTML = originalText;
-                        btn.style.borderColor = "#c8c0b0";
-                        btn.style.backgroundColor = "transparent";
-                    }, 2000);
-                }
-            } catch (err) {
-                console.error("No se pudo copiar el texto", err);
-            }
-            document.body.removeChild(tempInput);
+            const btn = document.querySelector('.btn-registry-secondary');
+            const origHTML = btn.innerHTML;
+            btn.innerHTML = "✨ ¡Copiado con éxito!";
+            setTimeout(() => {
+                btn.innerHTML = origHTML;
+            }, 2000);
+        }
+
+        // Enlace Dinámico para Confirmar Asistencia por WhatsApp
+        function confirmarWhatsApp(destinatario) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nombreInvitado = urlParams.get('invitado') || 'Invitado Especial';
+            
+            // ⬇️ SE HA ACTUALIZADO EL NÚMERO DE FRANCISCO ⬇️
+            // Formato: Código de país (52 para México) + tu número de 10 dígitos. Sin espacios ni signos +
+            const numCelular = (destinatario === 'Marlene') ? '52XXXXXXXXXX' : '523312671008'; 
+            
+            const mensaje = `¡Hola ${destinatario}! Confirmo con muchísima alegría mi asistencia a su boda este próximo 09 de Octubre de 2026. Firmado: ${nombreInvitado}. ✨🤵🏻‍♂️👰🏻‍♀️`;
+            window.open(`https://wa.me/${numCelular}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
     </script>
 </body>
 </html>
+```
+eof
+
+El número de Francisco ya quedó 100% listo y funcional. En cuanto tengas tu número de celular a la mano, escríbemelo aquí y con mucho gusto lo actualizo de la misma manera para que ambos botones queden activos. 😊
