@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda | Marlene & Francisco</title>
+    
+    <!-- FUENTES DE GOOGLE: Great Vibes (Títulos) y Montserrat (Textos) -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #4a4a4a;
+            background-color: #fff; 
+            text-align: center;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Letra para los títulos y textos importantes */
+        h1, h2, .envelope-title, .nos-casamos, .envelope-paper {
+            font-family: 'Great Vibes', cursive;
+            font-weight: normal;
+        }
+
+        /* Bloquea el desplazamiento mientras el sobre está cerrado */
+        body.no-scroll { overflow: hidden; }
+
+        /* --- PANTALLA DEL SOBRE ANIMADO --- */
+        #envelope-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: #f1efea; z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+        .envelope-title { color: #bca371; font-size: 2.8rem; margin-bottom: 30px; letter-spacing: 2px; text-transform: none; }
+        .envelope-wrapper { position: relative; width: 320px; height: 220px; cursor: pointer; transition: transform 0.3s; }
+        .envelope-wrapper:hover { transform: scale(1.02); }
+        .envelope { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #cbb497; border-radius: 0 0 8px 8px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .envelope-paper { position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; background-color: #fff; z-index: 1; display: flex; justify-content: center; align-items: center; font-size: 2rem; color: #bca371; padding: 20px; box-sizing: border-box; border: 1px solid #e0d8c3; transition: transform 0.8s ease 0.3s; text-align: center; flex-direction: column; }
+        .envelope-left { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-style: solid; border-width: 110px 0 110px 160px; border-color: transparent transparent transparent #e6d5c3; z-index: 3; }
+        .envelope-right { position: absolute; bottom: 0; right: 0; width: 0; height: 0; border-style: solid; border-width: 110px 160px 110px 0; border-color: transparent #e6d5c3 transparent transparent; z-index: 3; }
+        .envelope-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-style: solid; border-width: 0 160px 130px 160px; border-color: transparent transparent #efdfcd transparent; z-index: 4; }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-style: solid; border-width: 135px 160px 0 160px; border-color: #dccaaf transparent transparent transparent; z-index: 5; transform-origin: top; transition: transform 0.6s ease, z-index 0.2s 0.6s; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
+        .envelope-seal { position: absolute; top: 135px; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 65px; background-color: #bca371; border-radius: 50%; z-index: 6; color: white; display: flex; justify-content: center; align-items: center; font-size: 1rem; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #a68d5d; transition: opacity 0.3s ease; font-family: 'Montserrat', sans-serif; }
+        .open .envelope-flap { transform: rotateX(180deg); z-index: 0; }
+        .open .envelope-seal { opacity: 0; }
+        .open .envelope-paper { transform: translateY(-100px); z-index: 4; }
+        .hide-screen { opacity: 0; visibility: hidden; }
+
+        /* --- ESTILO PARA EL ENCABEZADO (CARRUSEL PRINCIPAL ACTUALIZADO CON 6 FOTOS) --- */
+        header { position: relative; overflow: hidden; color: #ffffff; padding: 0; border-bottom: 1px solid #e0d8c3; height: 100vh; }
+        .slider-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-color: #000; }
+        /* Animación extendida a 30s para acomodar 6 imágenes */
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center center; opacity: 0; animation: fadeSlide 30s infinite; }
+        
+        .slide-1 { background-image: url('https://www.dropbox.com/scl/fi/b7trmr634aca24tahjoxm/Save-the-date-3.jpg?rlkey=h0vhw1u80sh30xmir7dbex1d9&st=nvlqbnd8&raw=1'); animation-delay: 0s; }
+        .slide-2 { background-image: url('https://www.dropbox.com/scl/fi/ho9foicykqjycti4k6tri/Save-the-date-26.jpg?rlkey=sdwx8sxslt7h7up0u5zhi97nj&st=menxl9fk&raw=1'); animation-delay: 5s; }
+        .slide-3 { background-image: url('https://www.dropbox.com/scl/fi/10o1m3r63yqrwz7zuy9ae/Save-the-date-32.jpg?rlkey=ib126ixd4kur4lqom0o0tubm3&st=heljutcu&raw=1'); animation-delay: 10s; }
+        .slide-4 { background-image: url('https://www.dropbox.com/scl/fi/oeq6j2vkbq45zu0qeoskf/Save-the-date-31.jpg?rlkey=gkbfazu4qrv890ytk8nqgjdff&st=yystga08&raw=1'); animation-delay: 15s; }
+        .slide-5 { background-image: url('https://www.dropbox.com/scl/fi/5dfgzimwjjtrvx1k94afv/Save-the-date-38.jpg?rlkey=jwdr244tj4mq0i24qdbw3ddv5&st=3wxc802f&raw=1'); animation-delay: 20s; }
+        .slide-6 { background-image: url('https://www.dropbox.com/scl/fi/pufdcaz89cje0fiocn7j2/Save-the-date-9.jpg?rlkey=9vdt84tmzr5tc6dwvs6fvux07&st=vszhcty4&raw=1'); animation-delay: 25s; }
+        
+        /* Keyframes ajustados para 30 segundos (5 seg por imagen) */
+        @keyframes fadeSlide { 
+            0% { opacity: 0; transform: scale(1); } 
+            3.33% { opacity: 1; } 
+            13.33% { opacity: 1; } 
+            16.66% { opacity: 0; transform: scale(1.08); } 
+            100% { opacity: 0; } 
+        }
+
+        .header-overlay { position: relative; z-index: 2; background-color: rgba(0, 0, 0, 0.45); padding: 100px 20px; width: 100%; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+        header p.nos-casamos { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 5px; margin-top: 0; color: #ffffff !important; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); }
+        header h1 { font-size: 5rem; color: #ffffff !important; margin-bottom: 10px; margin-top: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.8); }
+        header p { color: #ffffff !important; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); font-size: 1.1rem; letter-spacing: 1px;}
+        
+        #countdown { display: flex; justify-content: center; align-items: center; margin-top: 30px; font-size: 1.1rem; color: #ffffff; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); font-family: 'Montserrat', sans-serif;}
+        .countdown-item { margin: 0 15px; text-align: center; }
+        .countdown-number { font-size: 2.8rem; font-weight: bold; color: #ffffff !important; }
+
+        @media (max-width: 600px) {
+            header p.nos-casamos { font-size: 2rem; }
+            header h1 { font-size: 3.5rem; }
+            h2 { font-size: 2.2rem !important; }
+            .countdown-item { margin: 0 6px; }
+            .countdown-number { font-size: 1.8rem; }
+            #countdown { font-size: 0.9rem; margin-top: 20px; }
+            .envelope-wrapper { transform: scale(0.9); }
+        }
+
+        /* --- ESTILOS PARA EL EFECTO PARALLAX Y FONDOS SÓLIDOS --- */
+        .content-block {
+            background-color: #f9f7f2; 
+            position: relative;
+            z-index: 2; 
+            padding: 60px 20px; 
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.1); 
+        }
+
+        .section { max-width: 900px; margin: 0 auto; box-sizing: border-box; }
+
+        .parallax-window {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 400px; 
+            position: relative;
+            z-index: 1;
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .parallax-window { background-attachment: scroll; }
+        }
+
+        h2 { font-size: 3.2rem; color: #bca371; border-bottom: 1px solid #bca371; display: inline-block; padding-bottom: 5px; margin-top: 20px; margin-bottom: 10px;}
+        .parents-container { display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 30px; }
+        .parents-box { margin: 15px; padding: 20px; min-width: 250px; }
+        .parents-box h3 { font-size: 1rem; color: #999; margin-bottom: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
+        .parents-box p { font-size: 1.1rem; margin: 5px 0; color: #4a4a4a; font-weight: 400;}
+        
+        /* -- ESTILO PARA EL CARRUSEL DE HISTORIA (INSTANTÁNEA/VOLTEO) -- */
+        .history-carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; 
+            height: 500px; 
+            margin: 30px auto 0 auto;
+            border-radius: 12px;
+            overflow: visible; 
+            perspective: 1500px; 
+            z-index: 10;
+        }
+
+        .history-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white; 
+            padding: 20px 20px 60px 20px; 
+            box-sizing: border-box;
+            border-radius: 8px;
+            box-shadow: 5px 5px 25px rgba(0,0,0,0.2); 
+            transform-origin: center center; 
+            backface-visibility: hidden; 
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out, z-index 1s; 
+            opacity: 0;
+            z-index: 1;
+            transform: rotateY(90deg); 
+        }
+
+        .history-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 2px solid #f1efea; 
+        }
+
+        .history-slide.active { opacity: 1; z-index: 10; transform: rotateY(0deg); }
+        .history-slide.exiting { transform: rotateY(-90deg); z-index: 1; }
+        
+        @media (max-width: 600px) {
+            .history-carousel-container { height: 350px; }
+            .history-slide { padding: 10px 10px 40px 10px; }
+        }
+
+        /* --- ESTILO PARA EL ITINERARIO --- */
+        .itinerary-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto 0 auto;
+            padding: 20px 0;
+        }
+
+        .itinerary-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #e0d8c3;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .itinerary-item {
+            position: relative;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .itinerary-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            border: 4px solid #bca371;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            transition: all 0.5s ease;
+        }
+
+        .itinerary-item.active::before {
+            background: #bca371; 
+            box-shadow: 0 0 15px rgba(188, 163, 113, 0.8); 
+            transform: translate(-50%, -50%) scale(1.2); 
+        }
+
+        .itinerary-content {
+            width: 45%;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease; 
+        }
+
+        .itinerary-item.active .itinerary-content {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .itinerary-content h3 { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #bca371; margin-top: 0; margin-bottom: 10px; font-weight: normal;}
+        .itinerary-content p { font-size: 0.95rem; margin: 0;}
+
+        .itinerary-content.left { text-align: right; order: 1; }
+        .itinerary-content.right { text-align: left; order: 2; }
+
+        /* --- Diseñando las cajas premium para los emojis del Itinerario... --- */
+        .itinerary-emoji-box {
+            width: 45%;
+            height: 180px; 
+            background: #fdfcf9;
+            border: 1px solid #e0d8c3;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            order: 2;
+            transition: all 0.5s ease;
+            user-select: none;
+        }
+
+        .itinerary-item.active .itinerary-emoji-box {
+            transform: scale(1.05); 
+            background: #fff;
+            border-color: #bca371;
+            box-shadow: 0 10px 25px rgba(188, 163, 113, 0.15);
+        }
+
+        .itinerary-emoji-box.right { order: 1; }
+        
+        @media (max-width: 600px) {
+            .itinerary-timeline::before { left: 20px; }
+            .itinerary-item { flex-direction: column; align-items: flex-start; }
+            .itinerary-item::before { left: 20px; transform: translate(-50%, -50%); top: 30px; }
+            .itinerary-item.active::before { transform: translate(-50%, -50%) scale(1.2); }
+            .itinerary-content { width: calc(100% - 60px); margin-left: 60px; margin-bottom: 20px; order: 1 !important; text-align: left !important; }
+            .itinerary-emoji-box { width: calc(100% - 60px); margin-left: 60px; order: 2 !important; height: 120px; font-size: 3.5rem; }
+        }
+
+        /* --- ESTILOS PARA LOS BOTONES E INFO CARDS --- */
+        .calendar-container { margin: 30px auto; padding: 20px; text-align: center; }
+        .calendar-container h3 { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #bca371; margin-top: 0; margin-bottom: 10px; font-weight: normal;}
+        .btn-calendar { background-color: #bca371; color: white; padding: 15px 30px; text-decoration: none; border-radius: 30px; font-size: 1.1rem; transition: background 0.3s; display: inline-block; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; border: none; }
+        .btn-calendar:hover { background-color: #a68d5d; transform: scale(1.05); }
+
+        .info-card { background: white; padding: 30px; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
+        .info-card-img { width: 100%; height: auto; max-height: 250px; border-radius: 8px; margin-bottom: 20px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        .btn-rsvp { background-color: #bca371; color: white; padding: 15px 30px; text-decoration: none; border-radius: 30px; font-size: 1.1rem; transition: background 0.3s; display: inline-block; margin-top: 20px; font-weight: 600; }
+        .btn-rsvp:hover { background-color: #a68d5d; transform: scale(1.05); }
+        .btn-map { background-color: transparent; color: #bca371; border: 2px solid #bca371; padding: 10px 20px; text-decoration: none; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s ease; display: inline-block; margin-top: 15px; font-weight: 600; }
+        .btn-map:hover { background-color: #bca371; color: white; }
+
+        /* Estilo moderno para enmarcar el diseño del código de vestimenta */
+        .dress-code-image-container {
+            max-width: 440px;
+            margin: 25px auto 15px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 6px solid #ffffff;
+            background-color: #ffffff;
+            transition: transform 0.3s ease;
+        }
+        .dress-code-image-container:hover {
+            transform: scale(1.02);
+        }
+
+        /* --- ESTILOS PREMIUM PARA LA MESA DE REGALOS --- */
+        .registry-grid {
+            display: flex;
+            justify-content: center; /* Centrado desde que solo queda 1 tarjeta */
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .registry-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px 25px;
+            width: 100%;
+            max-width: 450px; /* Ancho máximo ideal para una sola tarjeta */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            border: 1px solid #e8e4db;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .registry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .registry-logo {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .registry-logo.liverpool {
+            color: #d10074; /* Color característico de Liverpool */
+            font-family: 'Montserrat', sans-serif;
+            text-transform: lowercase;
+            letter-spacing: -1px;
+            font-weight: bold;
+        }
+        .registry-details {
+            margin: 15px 0 25px 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .code-highlight {
+            background-color: #f7f5f0;
+            border: 1px dashed #bca371;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin: 15px 0;
+        }
+        .btn-registry-primary {
+            background-color: #bca371;
+            color: white;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 85%;
+            margin-bottom: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(188, 163, 113, 0.2);
+        }
+        .btn-registry-primary:hover {
+            background-color: #a68d5d;
+            box-shadow: 0 6px 15px rgba(188, 163, 113, 0.3);
+        }
+        .btn-registry-secondary {
+            background-color: transparent;
+            color: #4a4a4a;
+            border: 1px solid #c8c0b0;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 85%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .btn-registry-secondary:hover {
+            background-color: #f7f5f0;
+            border-color: #bca371;
+        }
+
+        #music-btn { position: fixed; bottom: 30px; right: 30px; background-color: #ffffff; color: #bca371; border: 2px solid #e0d8c3; width: 60px; height: 60px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        #music-btn:hover { background-color: #f9f7f2; transform: scale(1.1); }
+        footer { padding: 40px; font-size: 0.9rem; color: #999; background-color: #f1efea; }
+    </style>
+</head>
+<body class="no-scroll">
+
+    <!-- Pantalla del Sobre -->
+    <div id="envelope-screen">
+        <h2 class="envelope-title">Nuestra Boda</h2>
+        <div class="envelope-wrapper" onclick="abrirInvitacion()">
+            <div class="envelope"></div>
+            <div class="envelope-paper" id="nombre-invitado">M & F</div>
+            <div class="envelope-left"></div>
+            <div class="envelope-right"></div>
+            <div class="envelope-bottom"></div>
+            <div class="envelope-flap"></div>
+            <div class="envelope-seal">Abrir</div>
+        </div>
+    </div>
+
+    <!-- Música -->
+    <audio id="bg-music" loop>
+        <source src="https://dl.dropboxusercontent.com/scl/fi/ci3uu41ay07z61oo0zzr8/Matisse-Reik-Eres-T-Lyric-Video.mp3?rlkey=jxs44c56bkeufnd4h0thoa6ie&st=m4ikz2zp" type="audio/mpeg">
+    </audio>
+    <button id="music-btn" onclick="toggleMusic()" title="Reproducir/Pausar música">🎵</button>
+
+    <!-- Encabezado con Carrusel Principal (Actualizado con las 6 de Dropbox) -->
+    <header>
+        <div class="slider-container">
+            <div class="slide slide-1"></div>
+            <div class="slide slide-2"></div>
+            <div class="slide slide-3"></div>
+            <div class="slide slide-4"></div> 
+            <div class="slide slide-5"></div>
+            <div class="slide slide-6"></div>
+        </div>
+        <div class="header-overlay">
+            <p class="nos-casamos">¡Nos Casamos!</p>
+            <h1>Marlene & Francisco</h1>
+            <p>09 de Octubre de 2026</p>
+            <div id="countdown">
+                <div class="countdown-item"><div class="countdown-number" id="days">00</div><div>Días</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div>Horas</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="minutes">00</div><div>Minutos</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="seconds">00</div><div>Segundos</div></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BLOQUE SÓLIDO 1: Papás y Padrinos -->
+    <div class="content-block">
+        <div class="section">
+            <h2>Con la bendición de Dios y nuestros padres</h2>
+            <div class="parents-container">
+                <div class="parents-box">
+                    <h3>Padres de la Novia</h3>
+                    <p>Mayra Lozano Pérez</p>
+                    <p>Saúl Díaz Paz</p>
+                </div>
+                <div class="parents-box">
+                    <h3>Padres del Novio</h3>
+                    <p>Carmen Lorena Dorantes Espinoza</p>
+                    <p>Ramón Miguel Pulido Cisneros</p>
+                </div>
+            </div>
+            
+            <div class="parents-container" style="margin-top: 15px;">
+                <div class="parents-box" style="width: 100%; max-width: 500px; margin: 0 auto;">
+                    <h3>Padrinos de Velación</h3>
+                    <p>Maria del Socorro Espinosa Sahagún</p>
+                    <p>Miguel Dorantes Benítes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EFECTO PARALLAX 1 (Actualizado con Save-the-date-24) -->
+    <div class="parallax-window" style="background-image: url('https://www.dropbox.com/scl/fi/qu0jhypj1dvgu3fp1qpib/Save-the-date-24.jpg?rlkey=ggy2dog78n7rie4sbfx77416k&st=z5ljz2rq&raw=1');"></div>
+
+    <!-- BLOQUE SÓLIDO 2: Carrusel de Historia -->
+    <div class="content-block">
+        <div class="section">
+            <h2>Nuestra Historia</h2>
+            <p>Un pequeño recorrido por los momentos que nos trajeron hasta aquí.</p>
+            
+            <div class="history-carousel-container" id="historyCarousel">
+                <div class="history-slide active">
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/35n9ws8jwgqkalhhc7oky/WhatsApp-Image-2026-03-20-at-4.04.03-PM.jpeg?rlkey=wrvxpzbx377qymlvof1sl570j&st=d7ovtfid" alt="Momento 1">
+                </div>
+                <div class="history-slide">
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/yfs9z9omckqlade3qd6fm/WhatsApp-Image-2026-03-20-at-4.04.04-PM-1.jpeg?rlkey=xdq0qw2me9uvlfp7rgnfqxw1t&st=2al402fi" alt="Momento 2">
+                </div>
+                <div class="history-slide">
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/ssy7t10r1zdvk34kqs6h4/WhatsApp-Image-2026-03-20-at-4.04.04-PM-2.jpeg?rlkey=wqowc59xhn3hoq5z4mfm1ym4r&st=uaev0l28" alt="Momento 3">
+                </div>
+                <div class="history-slide">
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/2yjiyxv60ks7lot7s3ri5/WhatsApp-Image-2026-03-20-at-4.04.04-PM.jpeg?rlkey=0k2sk2zeb0nry3kzm91o8wax8&st=uasum3x4" alt="Momento 4">
+                </div>
+                <div class="history-slide">
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/7c9r6s60aob6yix585ii7/WhatsApp-Image-2026-03-20-at-4.15.10-PM.jpeg?rlkey=4ehbqvvzq4hx3n8x2uexw0z3v&st=2gq4ioci" alt="Momento 5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOQUE SÓLIDO: Itinerario -->
+    <div class="content-block">
+        <div class="section">
+            <h2>Nuestro Gran Día</h2>
+            <p>¡Prepárate para celebrar con nosotros! Aquí tienes el plan para el gran día.</p>
+            
+            <div class="itinerary-timeline">
+                <div class="itinerary-item">
+                    <div class="itinerary-content left">
+                        <h3>Ceremonia Religiosa</h3>
+                        <p>Acompáñanos a recibir la bendición de Dios en el inicio de nuestra vida juntos.</p>
+                    </div>
+                    <div class="itinerary-emoji-box">⛪</div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content right">
+                        <h3>Ceremonia Civil</h3>
+                        <p>¡Es oficial! Celebra con nosotros nuestra unión ante la ley.</p>
+                    </div>
+                    <div class="itinerary-emoji-box right">✍️</div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content left">
+                        <h3>Recepción</h3>
+                        <p>La fiesta comienza. Disfruta de un cóctel de bienvenida mientras nos preparamos.</p>
+                    </div>
+                    <div class="itinerary-emoji-box">🥂</div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content right">
+                        <h3>Cena</h3>
+                        <p>¡A comer! Disfruta de un delicioso banquete que hemos preparado para ti.</p>
+                    </div>
+                    <div class="itinerary-emoji-box right">🍽️</div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content left">
+                        <h3>Primer Baile</h3>
+                        <p>Nuestro primer baile oficial. Acompáñanos a vivir este momento tan romántico.</p>
+                    </div>
+                    <div class="itinerary-emoji-box">🤵🏻‍♂️👰🏻‍♀️</div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content right">
+                        <h3>A Bailar</h3>
+                        <p>¡La pista es tuya! Saca tus mejores pasos y prepárate para bailar toda la noche.</p>
+                    </div>
+                    <div class="itinerary-emoji-box right">🪩</div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content left">
+                        <h3>Fin de la Fiesta</h3>
+                        <p>¡Gracias por acompañarnos! La fiesta termina aquí, pero nuestro amor durará por siempre.</p>
+                    </div>
+                    <div class="itinerary-emoji-box">💖</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EFECTO PARALLAX 2 (Actualizado con Save-the-date-17) -->
+    <div class="parallax-window" style="background-image: url('https://www.dropbox.com/scl/fi/6yxpab7ykvoz9zfwul5s4/Save-the-date-17.jpg?rlkey=3ujpa34elzn9c8o5ulnptczsu&st=l77q843a&raw=1');"></div>
+
+    <!-- BLOQUE SÓLIDO 3: Información de Eventos -->
+    <div class="content-block">
+        <div class="section">
+            
+            <div class="calendar-container">
+                <h3>¡Guarda la fecha!</h3>
+                <a href="TU_LINK_DE_CALENDARIO_O_ICS_AQUI" target="_blank" class="btn-calendar">📅 Agregar a mi Calendario</a>
+            </div>
+
+            <h2>La Ceremonia</h2>
+            <div class="info-card">
+                <img src="https://dl.dropboxusercontent.com/scl/fi/glzcg4tfbz9sz2v6lo1xs/493706424_4049738828578755_4794075696194092901_n.jpg?rlkey=067ulbs463046ken5f7nkzvtf&st=hxwib7m5" alt="Cuasiparroquia Maria Reina de la Paz" class="info-card-img">
+                <p><strong>Lugar:</strong> Cuasiparroquia Maria Reina de la Paz</p>
+                <p><strong>Hora:</strong> 13:00 hrs</p>
+                <p>Dirección: C. Albatros 270, Marina Vallarta, 48335 Puerto Vallarta, Jal.</p>
+                <a href="https://maps.app.goo.gl/U6uChvCmdSKPqPh59" target="_blank" class="btn-map">📍 Ver en Google Maps</a>
+            </div>
+
+            <h2>La Recepción</h2>
+            <div class="info-card">
+                <img src="https://dl.dropboxusercontent.com/scl/fi/5rducssjgsxg8fczr96xw/ae77f2323dbcbee6516670f21a55d603ab796db2c54da19d14566156f98a.avif?rlkey=puee7xwjsz01est1b6672jz6q&st=91jprxtk" alt="Occidental Nuevo Vallarta" class="info-card-img">
+                <p><strong>Lugar:</strong> Occidental Nuevo Vallarta - All Inclusive</p>
+                <p><strong>Hora:</strong> 17:00 hrs</p>
+                <p>¡Prepárate para bailar toda la noche!</p>
+                <a href="https://maps.app.goo.gl/LH418iAz6vvnszkg9" target="_blank" class="btn-map">📍 Ver en Google Maps</a>
+            </div>
+
+            <!-- TARJETA DEL CÓDIGO DE VESTIMENTA (CON TU IMAGEN DE DISEÑO) -->
+            <div class="info-card" style="background-color: #fdfcf9; border: 1px solid #e0d8c3;">
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #bca371; margin-top: 0; font-weight: normal; margin-bottom: 5px;">Código de Vestimenta</h3>
+                
+                <div class="dress-code-image-container">
+                    <img src="https://www.dropbox.com/scl/fi/8srraz1x8tu74d7vctx60/C-digo-Vestimenta.jpeg?rlkey=ujb1hcidvx9dtfv14v2leyq19&st=d7pgdgyk&raw=1" alt="Sugerencia de Código de Vestimenta" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+
+            <!-- SECCIÓN: MESA DE REGALOS PREMIUM LIVERPOOL (UNIFICADA) -->
+            <h2>Mesa de Regalos</h2>
+            <p>Tu presencia en nuestra boda es el mejor regalo que podríamos recibir. Sin embargo, si deseas hacernos un detalle, te dejamos nuestra mesa de regalos oficial:</p>
+            
+            <div class="registry-grid">
+                <!-- Tarjeta Única de Liverpool Centrada -->
+                <div class="registry-card">
+                    <div class="registry-logo liverpool">liverpool</div>
+                    <div class="registry-details">
+                        <p>Puedes buscar nuestra mesa directamente en tienda o en su sitio oficial usando el siguiente número de evento:</p>
+                        <div class="code-highlight" id="code-event">51975199</div>
+                    </div>
+                    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                        <!-- Botón directo a tu mesa de regalos en Liverpool -->
+                        <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51975199" target="_blank" class="btn-registry-primary">🎁 Ver Mesa de Regalos</a>
+                        <!-- Botón interactivo de Copiar Código -->
+                        <button class="btn-registry-secondary" onclick="copyValue('51975199', 'btn-copy-ev')" id="btn-copy-ev">
+                            <span>📋 Copiar Número</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <br><br>
+            <h2>Comparte tus Recuerdos</h2>
+            <p>¡Ayúdanos a capturar cada instante! Sube las fotos y videos que tomes de nuestra boda a nuestra carpeta compartida.</p>
+            <a href="TU_LINK_DE_CARPETA_COMPARTIDA_AQUI" target="_blank" class="btn-rsvp">📸 Subir mis fotos</a>
+            
+        </div>
+    </div>
+
+    <footer>
+        <p>Hecho con ❤️ para nuestra familia y amigos.</p>
+    </footer>
+
+    <script>
+        // --- PERSONALIZACIÓN DEL SOBRE CON EL NOMBRE DEL INVITADO ---
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var nombreInvitado = urlParams.get('invitado');
+            if (nombreInvitado) {
+                var papelSobre = document.getElementById('nombre-invitado');
+                papelSobre.innerHTML = nombreInvitado;
+                if (nombreInvitado.length > 15) { papelSobre.style.fontSize = '1.6rem'; }
+            }
+        });
+
+        // --- CONTROL DEL SOBRE ---
+        function abrirInvitacion() {
+            var envelopeWrapper = document.querySelector('.envelope-wrapper');
+            var envelopeScreen = document.getElementById('envelope-screen');
+            var body = document.body;
+            envelopeWrapper.classList.add('open');
+            if (!isPlaying) { toggleMusic(); }
+            setTimeout(function() {
+                envelopeScreen.classList.add('hide-screen');
+                body.classList.remove('no-scroll');
+                startHistoryCarousel();
+            }, 1800);
+        }
+
+        // --- CONTROL DE MÚSICA ---
+        var music = document.getElementById("bg-music");
+        var musicBtn = document.getElementById("music-btn");
+        var isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) { music.pause(); musicBtn.innerHTML = "🎵"; }
+            else { music.play().catch(function(error) { console.log("Bloqueo de audio detectado"); }); musicBtn.innerHTML = "⏸️"; }
+            isPlaying = !isPlaying;
+        }
+
+        // --- Configuración de la Cuenta Regresiva ---
+        var weddingDate = new Date(2026, 9, 9); // Para JS 9 = Octubre 
+        function updateCountdown() {
+            var now = new Date(); var timeDifference = weddingDate - now;
+            if (timeDifference <= 0) { document.getElementById('countdown').innerHTML = "¡Es hoy! ¡Es hoy!"; return; }
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            document.getElementById('days').innerHTML = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerHTML = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
+        }
+        setInterval(updateCountdown, 1000); updateCountdown();
+
+        // --- CONTROL DEL CARRUSEL DE HISTORIA (VOLTEO) ---
+        let historySlides = document.querySelectorAll('.history-slide');
+        let currentHistoryIndex = 0;
+        let historyInterval;
+
+        function showNextHistoryPhoto() {
+            let currentSlide = historySlides[currentHistoryIndex];
+            currentSlide.classList.add('exiting'); 
+
+            currentHistoryIndex = (currentHistoryIndex + 1) % historySlides.length;
+            
+            let nextSlide = historySlides[currentHistoryIndex];
+            
+            nextSlide.classList.remove('exiting');
+            nextSlide.classList.add('active'); 
+
+            currentSlide.classList.remove('active');
+        }
+
+        function startHistoryCarousel() {
+            historyInterval = setInterval(showNextHistoryPhoto, 4000);
+        }
+
+        // --- EFECTO DE REVELACIÓN POR SCROLL (ITINERARIO) ---
+        const itineraryItems = document.querySelectorAll('.itinerary-item');
+        
+        window.addEventListener('scroll', () => {
+            const triggerBottom = window.innerHeight * 0.75; 
+            
+            itineraryItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                
+                if (itemTop < triggerBottom) {
+                    item.classList.add('active'); 
+                } else {
+                    item.classList.remove('active'); 
+                }
+            });
+        });
+
+        // --- LÓGICA DE COPIADO INTELIGENTE (IFRAME SAFE) ---
+        function copyValue(valueToCopy, buttonId) {
+            var tempInput = document.createElement("input");
+            tempInput.value = valueToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); 
+
+            try {
+                var success = document.execCommand("copy");
+                if (success) {
+                    var btn = document.getElementById(buttonId);
+                    var originalText = btn.innerHTML;
+                    btn.innerHTML = "✓ ¡Copiado con éxito!";
+                    btn.style.borderColor = "#bca371";
+                    btn.style.backgroundColor = "#fdfcf9";
+                    setTimeout(function() {
+                        btn.innerHTML = originalText;
+                        btn.style.borderColor = "#c8c0b0";
+                        btn.style.backgroundColor = "transparent";
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error("No se pudo copiar el texto", err);
+            }
+            document.body.removeChild(tempInput);
+        }
+    </script>
+</body>
+</html>
