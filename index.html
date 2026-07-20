@@ -498,7 +498,6 @@
             
             <div class="history-carousel-container" id="historyCarousel">
                 <div class="history-slide active">
-                    <!-- NOTA: He aplicado object-position: center 10%; para subir el encuadre. Si prefieres alejar por completo la foto y verla entera tipo polaroid con fondo de color, puedes sustituir style="object-position: center 10%;" por style="object-fit: contain; background-color: #faf8f4;" -->
                     <img src="https://dl.dropboxusercontent.com/scl/fi/35n9ws8jwgqkalhhc7oky/WhatsApp-Image-2026-03-20-at-4.04.03-PM.jpeg?rlkey=wrvxpzbx377qymlvof1sl570j&st=d7ovtfid" alt="Momento 1" style="object-position: center 10%;">
                 </div>
                 <div class="history-slide">
@@ -803,18 +802,10 @@
         function confirmarWhatsApp(destinatario) {
             const urlParams = new URLSearchParams(window.location.search);
             const nombreInvitado = urlParams.get('invitado') || 'Invitado Especial';
-            
-            // ⬇️ SE HA ACTUALIZADO EL NÚMERO DE FRANCISCO ⬇️
-            // Formato: Código de país (52 para México) + tu número de 10 dígitos. Sin espacios ni signos +
             const numCelular = (destinatario === 'Marlene') ? '52XXXXXXXXXX' : '523312671008'; 
-            
             const mensaje = `¡Hola ${destinatario}! Confirmo con muchísima alegría mi asistencia a su boda este próximo 09 de Octubre de 2026. Firmado: ${nombreInvitado}. ✨🤵🏻‍♂️👰🏻‍♀️`;
             window.open(`https://wa.me/${numCelular}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
     </script>
 </body>
 </html>
-```
-eof
-
-El número de Francisco ya quedó 100% listo y funcional. En cuanto tengas tu número de celular a la mano, escríbemelo aquí y con mucho gusto lo actualizo de la misma manera para que ambos botones queden activos. 😊
