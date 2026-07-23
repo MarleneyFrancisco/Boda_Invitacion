@@ -52,26 +52,23 @@
         .open .envelope-paper { transform: translateY(-100px); z-index: 4; }
         .hide-screen { opacity: 0; visibility: hidden; }
 
-        /* --- ESTILO PARA EL ENCABEZADO (CARRUSEL PRINCIPAL CON 6 FOTOS) --- */
+        /* --- ESTILO PARA EL ENCABEZADO (CARRUSEL PRINCIPAL CON 3 FOTOS SELECCIONADAS) --- */
         header { position: relative; overflow: hidden; color: #ffffff; padding: 0; border-bottom: 1px solid #e0d8c3; height: 100vh; }
         .slider-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-color: #000; }
         
-        /* Animación extendida a 30s para acomodar 6 imágenes */
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center center; opacity: 0; animation: fadeSlide 30s infinite; }
+        /* Animación para 3 imágenes en un ciclo de 15s (5s por imagen) */
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center center; opacity: 0; animation: fadeSlide 15s infinite; }
         
-        .slide-1 { background-image: url('https://www.dropbox.com/scl/fi/b7trmr634aca24tahjoxm/Save-the-date-3.jpg?rlkey=h0vhw1u80sh30xmir7dbex1d9&st=nvlqbnd8&raw=1'); animation-delay: 0s; }
-        .slide-2 { background-image: url('https://www.dropbox.com/scl/fi/ho9foicykqjycti4k6tri/Save-the-date-26.jpg?rlkey=sdwx8sxslt7h7up0u5zhi97nj&st=menxl9fk&raw=1'); animation-delay: 5s; }
-        .slide-3 { background-image: url('https://www.dropbox.com/scl/fi/10o1m3r63yqrwz7zuy9ae/Save-the-date-32.jpg?rlkey=ib126ixd4kur4lqom0o0tubm3&st=heljutcu&raw=1'); animation-delay: 10s; }
-        .slide-4 { background-image: url('https://www.dropbox.com/scl/fi/oeq6j2vkbq45zu0qeoskf/Save-the-date-31.jpg?rlkey=gkbfazu4qrv890ytk8nqgjdff&st=yystga08&raw=1'); animation-delay: 15s; }
-        .slide-5 { background-image: url('https://www.dropbox.com/scl/fi/5dfgzimwjjtrvx1k94afv/Save-the-date-38.jpg?rlkey=jwdr244tj4mq0i24qdbw3ddv5&st=3wxc802f&raw=1'); animation-delay: 20s; }
-        .slide-6 { background-image: url('https://www.dropbox.com/scl/fi/pufdcaz89cje0fiocn7j2/Save-the-date-9.jpg?rlkey=9vdt84tmzr5tc6dwvs6fvux07&st=vszhcty4&raw=1'); animation-delay: 25s; }
+        .slide-1 { background-image: url('https://www.dropbox.com/scl/fi/ho9foicykqjycti4k6tri/Save-the-date-26.jpg?rlkey=sdwx8sxslt7h7up0u5zhi97nj&raw=1'); animation-delay: 0s; }
+        .slide-2 { background-image: url('https://www.dropbox.com/scl/fi/b7trmr634aca24tahjoxm/Save-the-date-3.jpg?rlkey=h0vhw1u80sh30xmir7dbex1d9&raw=1'); animation-delay: 5s; }
+        .slide-3 { background-image: url('https://www.dropbox.com/scl/fi/5dfgzimwjjtrvx1k94afv/Save-the-date-38.jpg?rlkey=jwdr244tj4mq0i24qdbw3ddv5&raw=1'); animation-delay: 10s; }
         
-        /* Keyframes ajustados para 30 segundos (5 seg por imagen) */
+        /* Keyframes ajustados para 15 segundos (3 imágenes) */
         @keyframes fadeSlide { 
             0% { opacity: 0; transform: scale(1); } 
-            3.33% { opacity: 1; } 
-            13.33% { opacity: 1; } 
-            16.66% { opacity: 0; transform: scale(1.08); } 
+            6.66% { opacity: 1; } 
+            26.66% { opacity: 1; } 
+            33.33% { opacity: 0; transform: scale(1.08); } 
             100% { opacity: 0; } 
         }
 
@@ -160,7 +157,8 @@
         .history-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background-color: #faf8f5;
             border: 2px solid #f1efea; 
         }
 
@@ -243,7 +241,7 @@
         .itinerary-content.left { text-align: right; order: 1; }
         .itinerary-content.right { text-align: left; order: 2; }
 
-        /* --- Diseñando las cajas premium para los emojis del Itinerario... --- */
+        /* Cajas de emojis del Itinerario */
         .itinerary-emoji-box {
             width: 45%;
             height: 180px; 
@@ -281,7 +279,8 @@
         /* --- ESTILOS PARA LOS BOTONES E INFO CARDS --- */
         .calendar-container { margin: 30px auto; padding: 20px; text-align: center; }
         .calendar-container h3 { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #bca371; margin-top: 0; margin-bottom: 10px; font-weight: normal;}
-        .btn-calendar { background-color: #bca371; color: white; padding: 15px 30px; text-decoration: none; border-radius: 30px; font-size: 1.1rem; transition: background 0.3s; display: inline-block; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; border: none; }
+        .calendar-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 15px; }
+        .btn-calendar { background-color: #bca371; color: white; padding: 14px 24px; text-decoration: none; border-radius: 30px; font-size: 1rem; transition: background 0.3s, transform 0.3s; display: inline-block; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; border: none; }
         .btn-calendar:hover { background-color: #a68d5d; transform: scale(1.05); }
 
         .info-card { background: white; padding: 30px; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
@@ -292,7 +291,7 @@
         .btn-map { background-color: transparent; color: #bca371; border: 2px solid #bca371; padding: 10px 20px; text-decoration: none; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s ease; display: inline-block; margin-top: 15px; font-weight: 600; }
         .btn-map:hover { background-color: #bca371; color: white; }
 
-        /* Estilo moderno para enmarcar el diseño del código de vestimenta */
+        /* Estilo para el código de vestimenta */
         .dress-code-image-container {
             max-width: 440px;
             margin: 25px auto 15px auto;
@@ -307,10 +306,10 @@
             transform: scale(1.02);
         }
 
-        /* --- ESTILOS PREMIUM PARA LA MESA DE REGALOS --- */
+        /* --- ESTILOS PARA LA MESA DE REGALOS --- */
         .registry-grid {
             display: flex;
-            justify-content: center; /* Centrado */
+            justify-content: center;
             gap: 20px;
             margin-top: 30px;
             flex-wrap: wrap;
@@ -320,7 +319,7 @@
             border-radius: 12px;
             padding: 35px 25px;
             width: 100%;
-            max-width: 450px; /* Ancho máximo ideal para una sola tarjeta */
+            max-width: 450px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.04);
             border: 1px solid #e8e4db;
             display: flex;
@@ -343,7 +342,7 @@
             gap: 8px;
         }
         .registry-logo.liverpool {
-            color: #d10074; /* Color característico de Liverpool */
+            color: #d10074;
             font-family: 'Montserrat', sans-serif;
             text-transform: lowercase;
             letter-spacing: -1px;
@@ -437,15 +436,12 @@
     </audio>
     <button id="music-btn" onclick="toggleMusic()" title="Reproducir/Pausar música">🎵</button>
 
-    <!-- Encabezado con Carrusel Principal (Actualizado con las 6 de Dropbox) -->
+    <!-- Encabezado con Carrusel Principal (3 Fotos Seleccionadas) -->
     <header>
         <div class="slider-container">
             <div class="slide slide-1"></div>
             <div class="slide slide-2"></div>
             <div class="slide slide-3"></div>
-            <div class="slide slide-4"></div> 
-            <div class="slide slide-5"></div>
-            <div class="slide slide-6"></div>
         </div>
         <div class="header-overlay">
             <p class="nos-casamos">¡Nos Casamos!</p>
@@ -487,8 +483,8 @@
         </div>
     </div>
 
-    <!-- EFECTO PARALLAX 1 (Actualizado con Save-the-date-24) -->
-    <div class="parallax-window" style="background-image: url('https://www.dropbox.com/scl/fi/qu0jhypj1dvgu3fp1qpib/Save-the-date-24.jpg?rlkey=ggy2dog78n7rie4sbfx77416k&st=z5ljz2rq&raw=1');"></div>
+    <!-- EFECTO PARALLAX 1 -->
+    <div class="parallax-window" style="background-image: url('https://www.dropbox.com/scl/fi/ejpjwu77pl3fp4izsz2f8/Save-the-date-33.jpg?rlkey=u2n8rc3pri5c5g63o7hlco4jg&st=ytkfy8my&raw=1');"></div>
 
     <!-- BLOQUE SÓLIDO 2: Carrusel de Historia -->
     <div class="content-block">
@@ -511,6 +507,15 @@
                 </div>
                 <div class="history-slide">
                     <img src="https://dl.dropboxusercontent.com/scl/fi/7c9r6s60aob6yix585ii7/WhatsApp-Image-2026-03-20-at-4.15.10-PM.jpeg?rlkey=4ehbqvvzq4hx3n8x2uexw0z3v&st=2gq4ioci" alt="Momento 5">
+                </div>
+                <div class="history-slide">
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/qeqgoje4z5vzwrpgzelwv/WhatsApp-Image-2026-07-23-at-3.43.25-PM-4.jpeg?rlkey=4l22j55lxs2jkxhsoocxbeyki&st=mmfr656j" alt="Momento 6">
+                </div>
+                <div class="history-slide">
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/wxuiwvmenx9r9jsq03jso/WhatsApp-Image-2026-07-23-at-3.43.25-PM-1.jpeg?rlkey=2z8d8nabmm7ups7eh46bbwlpt&st=k476b1rf" alt="Momento 7">
+                </div>
+                <div class="history-slide">
+                    <img src="https://dl.dropboxusercontent.com/scl/fi/mhc05muaa8t3kqu9pckd2/WhatsApp-Image-2026-07-23-at-3.43.25-PM.jpeg?rlkey=4rlouzhkgxk2m5v9dxgc9qn6j&st=lrj3dpzl" alt="Momento 8">
                 </div>
             </div>
         </div>
@@ -554,36 +559,44 @@
                     </div>
                     <div class="itinerary-emoji-box right">🍽️</div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="itinerary-item">
-                    <div class="itinerary-content left">
-                        <h3>Primer Baile</h3>
-                        <p>Nuestro primer baile oficial. Acompáñanos a vivir este momento tan romántico.</p>
-                    </div>
-                    <div class="itinerary-emoji-box">🤵🏻‍♂️👰🏻‍♀️</div>
+    <!-- BLOQUE SÓLIDO 2.5: Carrusel Save the Date -->
+    <div class="content-block">
+        <div class="section">
+            <h2>Sesión Save the Date</h2>
+            <p>Un vistazo a nuestra sesión fotográfica de compromiso.</p>
+            
+            <div class="history-carousel-container" id="stdCarousel">
+                <div class="history-slide active">
+                    <img src="https://www.dropbox.com/scl/fi/10o1m3r63yqrwz7zuy9ae/Save-the-date-32.jpg?rlkey=ib126ixd4kur4lqom0o0tubm3&st=3o2ufqcb&raw=1" alt="Save the Date 1">
                 </div>
-
-                <div class="itinerary-item">
-                    <div class="itinerary-content right">
-                        <h3>A Bailar</h3>
-                        <p>¡La pista es tuya! Saca tus mejores pasos y prepárate para bailar toda la noche.</p>
-                    </div>
-                    <div class="itinerary-emoji-box right">🪩</div>
+                <div class="history-slide">
+                    <img src="https://www.dropbox.com/scl/fi/oeq6j2vkbq45zu0qeoskf/Save-the-date-31.jpg?rlkey=gkbfazu4qrv890ytk8nqgjdff&st=b1tb2fjf&raw=1" alt="Save the Date 2">
                 </div>
-
-                <div class="itinerary-item">
-                    <div class="itinerary-content left">
-                        <h3>Fin de la Fiesta</h3>
-                        <p>¡Gracias por acompañarnos! La fiesta termina aquí, pero nuestro amor durará por siempre.</p>
-                    </div>
-                    <div class="itinerary-emoji-box">💖</div>
+                <div class="history-slide">
+                    <img src="https://www.dropbox.com/scl/fi/pufdcaz89cje0fiocn7j2/Save-the-date-9.jpg?rlkey=9vdt84tmzr5tc6dwvs6fvux07&st=nqrqhdmy&raw=1" alt="Save the Date 3">
+                </div>
+                <div class="history-slide">
+                    <img src="https://www.dropbox.com/scl/fi/6yxpab7ykvoz9zfwul5s4/Save-the-date-17.jpg?rlkey=3ujpa34elzn9c8o5ulnptczsu&st=1w6ftp6f&raw=1" alt="Save the Date 4">
+                </div>
+                <div class="history-slide">
+                    <img src="https://www.dropbox.com/scl/fi/au1evspqlmsi0flhsv0mj/Save-the-date-30.jpg?rlkey=stuzuv77heheeq77ebhs4dze1&st=6r11nnl3&raw=1" alt="Save the Date 5">
+                </div>
+                <div class="history-slide">
+                    <img src="https://www.dropbox.com/scl/fi/w8l5a9af7b9ghkncop187/Save-the-date-13.jpg?rlkey=ems83tsc6von5kqo7msccau8w&st=ns8fr9ks&raw=1" alt="Save the Date 6">
+                </div>
+                <div class="history-slide">
+                    <img src="https://www.dropbox.com/scl/fi/uifudcbw1taheq1w5tavz/Save-the-date-40.jpg?rlkey=wqo4qwlxbqhv25okn0lybgbuh&st=ok86arje&raw=1" alt="Save the Date 7">
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- EFECTO PARALLAX 2 (Actualizado con Save-the-date-17) -->
-    <div class="parallax-window" style="background-image: url('https://www.dropbox.com/scl/fi/6yxpab7ykvoz9zfwul5s4/Save-the-date-17.jpg?rlkey=3ujpa34elzn9c8o5ulnptczsu&st=l77q843a&raw=1');"></div>
+    <!-- EFECTO PARALLAX 2 -->
+    <div class="parallax-window" style="background-image: url('https://www.dropbox.com/scl/fi/qu0jhypj1dvgu3fp1qpib/Save-the-date-24.jpg?rlkey=ggy2dog78n7rie4sbfx77416k&st=je50d4f1&raw=1');"></div>
 
     <!-- BLOQUE SÓLIDO 3: Información de Eventos -->
     <div class="content-block">
@@ -591,7 +604,10 @@
             
             <div class="calendar-container">
                 <h3>¡Guarda la fecha!</h3>
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Marlene+%26+Francisco&dates=20261009T180000Z/20261010T070000Z&details=%C2%A1Acomp%C3%A1%C3%B1anos+a+celebrar+nuestra+boda%21&location=Puerto+Vallarta%2C+Jal." target="_blank" class="btn-calendar">📅 Agregar a mi Calendario</a>
+                <div class="calendar-buttons">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Marlene+%26+Francisco&dates=20261009T180000Z/20261010T070000Z&details=%C2%A1Acomp%C3%A1%C3%B1anos+a+celebrar+nuestra+boda%21&location=Cuasiparroquia+Maria+Reina+de+la+Paz%2C+Puerto+Vallarta%2C+Jal." target="_blank" class="btn-calendar">📅 Agregar a Google Calendar</a>
+                    <button onclick="downloadICS()" class="btn-calendar" style="background-color: #a68d5d;">🍏 Apple / Outlook Calendar</button>
+                </div>
             </div>
 
             <h2>La Ceremonia</h2>
@@ -621,12 +637,11 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN: MESA DE REGALOS PREMIUM LIVERPOOL -->
+            <!-- SECCIÓN: MESA DE REGALOS LIVERPOOL -->
             <h2>Mesa de Regalos</h2>
             <p>Tu presencia en nuestra boda es el mejor regalo que podríamos recibir. Sin embargo, si deseas hacernos un detalle, te dejamos nuestra mesa de regalos oficial:</p>
             
             <div class="registry-grid">
-                <!-- Tarjeta Única de Liverpool Centrada -->
                 <div class="registry-card">
                     <div class="registry-logo liverpool">liverpool</div>
                     <div class="registry-details">
@@ -634,7 +649,7 @@
                         <div class="code-highlight" id="code-event">51975199</div>
                     </div>
                     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-                        <button class="btn-registry-primary" onclick="window.open('https://mesaderegalos.liverpool.com.mx/miseditados/buscarMesa?numeroEvento=51975199', '_blank')">Ir a la Mesa de Regalos</button>
+                        <button class="btn-registry-primary" onclick="window.open('https://mesaderegalos.liverpool.com.mx/milistaderegalos/51975199', '_blank')">Ir a la Mesa de Regalos</button>
                         <button class="btn-registry-secondary" onclick="copiarCodigoEvento()"><span id="copy-icon">📋</span> Copiar Número de Evento</button>
                     </div>
                 </div>
@@ -657,9 +672,9 @@
         <p style="font-size: 0.8rem; margin-top: 10px; color: #bca371;">¡Nos vemos en el día más feliz de nuestras vidas!</p>
     </footer>
 
-    <!-- JAVASCRIPT: FUNCIONES DE INTERACCIÓN Y ANIMACIÓN -->
+    <!-- JAVASCRIPT -->
     <script>
-        // Cargar nombre del invitado desde los parámetros de la URL (?invitado=Familia Diaz)
+        // Cargar nombre del invitado desde los parámetros de la URL
         window.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const invitado = params.get('invitado');
@@ -678,17 +693,14 @@
             const audio = document.getElementById('bg-music');
             const musicBtn = document.getElementById('music-btn');
 
-            // Ejecuta animación de apertura
             wrapper.classList.add('open');
 
-            // Intenta reproducir el tema musical
             audio.play().then(() => {
                 musicBtn.innerText = "⏸️";
             }).catch(err => {
-                console.log("Autoplay bloqueado por el navegador. Se reproducirá con interacción.");
+                console.log("Autoplay bloqueado por el navegador.");
             });
 
-            // Oculta la pantalla completa y rehabilita el desplazamiento
             setTimeout(() => {
                 screen.classList.add('hide-screen');
                 document.body.classList.remove('no-scroll');
@@ -709,7 +721,7 @@
             }
         }
 
-        // Cuenta Regresiva (Objetivo: 09 de Octubre de 2026 a las 13:00 hrs)
+        // Cuenta Regresiva
         const targetDate = new Date("Oct 9, 2026 13:00:00").getTime();
 
         function runCountdown() {
@@ -739,34 +751,37 @@
         setInterval(runCountdown, 1000);
         runCountdown();
 
-        // Slider rotativo automático de la sección de "Nuestra Historia"
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.history-slide');
+        // Control rotativo automático para carruseles de fotos
+        function setupCarousel(carouselId) {
+            let current = 0;
+            const slides = document.querySelectorAll(`#${carouselId} .history-slide`);
+            if (!slides.length) return;
 
-        function rotateHistorySlides() {
-            const activeSlide = slides[currentSlide];
-            activeSlide.classList.remove('active');
-            activeSlide.classList.add('exiting');
+            setInterval(() => {
+                const activeSlide = slides[current];
+                activeSlide.classList.remove('active');
+                activeSlide.classList.add('exiting');
 
-            currentSlide = (currentSlide + 1) % slides.length;
+                current = (current + 1) % slides.length;
 
-            const nextSlide = slides[currentSlide];
-            nextSlide.classList.remove('exiting');
-            nextSlide.classList.add('active');
+                const nextSlide = slides[current];
+                nextSlide.classList.remove('exiting');
+                nextSlide.classList.add('active');
 
-            // Quita la clase 'exiting' cuando la transición de volteo finaliza
-            setTimeout(() => {
-                slides.forEach((slide, idx) => {
-                    if (idx !== currentSlide) {
-                        slide.classList.remove('exiting');
-                    }
-                });
-            }, 1000);
+                setTimeout(() => {
+                    slides.forEach((slide, idx) => {
+                        if (idx !== current) {
+                            slide.classList.remove('exiting');
+                        }
+                    });
+                }, 1000);
+            }, 4000);
         }
-        // Cambio automático de foto cada 4 segundos
-        setInterval(rotateHistorySlides, 4000);
 
-        // Efecto scroll activo en la línea de tiempo del itinerario
+        setupCarousel('historyCarousel');
+        setupCarousel('stdCarousel');
+
+        // Efecto scroll en la línea de tiempo del itinerario
         const itineraryItems = document.querySelectorAll('.itinerary-item');
         window.addEventListener('scroll', () => {
             const triggerBottom = window.innerHeight * 0.85;
@@ -780,7 +795,31 @@
             });
         });
 
-        // Copiar Código de Evento de Liverpool al Portapapeles
+        // Descarga de archivo .ICS para Apple Calendar / Outlook
+        function downloadICS() {
+            const icsData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Boda Marlene y Francisco//MX
+BEGIN:VEVENT
+SUMMARY:Boda Marlene & Francisco
+DESCRIPTION:¡Acompáñanos a celebrar nuestra boda!
+LOCATION:Cuasiparroquia Maria Reina de la Paz, Puerto Vallarta, Jal.
+DTSTART:20261009T180000Z
+DTEND:20261010T070000Z
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Boda_Marlene_y_Francisco.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Copiar Código de Evento de Liverpool
         function copiarCodigoEvento() {
             const codeText = "51975199";
             const dummy = document.createElement("input");
