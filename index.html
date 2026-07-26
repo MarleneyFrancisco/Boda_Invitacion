@@ -235,7 +235,8 @@
             box-shadow: 0 12px 25px rgba(0,0,0,0.15);
         }
 
-        .itinerary-content h3 { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #bca371; margin-top: 0; margin-bottom: 10px; font-weight: normal;}
+        .itinerary-content h3 { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #bca371; margin-top: 0; margin-bottom: 5px; font-weight: normal;}
+        .itinerary-time { font-size: 0.85rem; font-weight: 600; color: #bca371; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; }
         .itinerary-content p { font-size: 0.95rem; margin: 0;}
 
         .itinerary-content.left { text-align: right; order: 1; }
@@ -554,7 +555,7 @@
         </div>
     </div>
 
-    <!-- BLOQUE SÓLIDO: Itinerario -->
+    <!-- BLOQUE SÓLIDO: Itinerario Ampliado -->
     <div class="content-block">
         <div class="section">
             <h2>Nuestro Gran Día</h2>
@@ -564,6 +565,7 @@
                 <div class="itinerary-item">
                     <div class="itinerary-content left">
                         <h3>Ceremonia Religiosa</h3>
+                        <div class="itinerary-time">13:00 HRS</div>
                         <p>Acompáñanos a recibir la bendición de Dios en el inicio de nuestra vida juntos.</p>
                     </div>
                     <div class="itinerary-emoji-box">⛪</div>
@@ -572,6 +574,7 @@
                 <div class="itinerary-item">
                     <div class="itinerary-content right">
                         <h3>Ceremonia Civil</h3>
+                        <div class="itinerary-time">17:00 HRS</div>
                         <p>¡Es oficial! Celebra con nosotros nuestra unión ante la ley.</p>
                     </div>
                     <div class="itinerary-emoji-box right">✍️</div>
@@ -579,18 +582,38 @@
 
                 <div class="itinerary-item">
                     <div class="itinerary-content left">
-                        <h3>Recepción</h3>
-                        <p>La fiesta comienza. Disfruta de un cóctel de bienvenida mientras nos preparamos.</p>
+                        <h3>Recepción & Cóctel</h3>
+                        <div class="itinerary-time">17:30 HRS</div>
+                        <p>La fiesta comienza. Disfruta de una bebida de bienvenida mientras nos preparamos.</p>
                     </div>
                     <div class="itinerary-emoji-box">🥂</div>
                 </div>
 
                 <div class="itinerary-item">
                     <div class="itinerary-content right">
-                        <h3>Cena</h3>
+                        <h3>Entrada de los Novios</h3>
+                        <div class="itinerary-time">18:00 HRS</div>
+                        <p>¡Démosle la bienvenida a los esposos con nuestro mejor aplauso y alegría!</p>
+                    </div>
+                    <div class="itinerary-emoji-box right">✨</div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content left">
+                        <h3>Cena / Banquete</h3>
+                        <div class="itinerary-time">19:00 HRS</div>
                         <p>¡A comer! Disfruta de un delicioso banquete que hemos preparado para ti.</p>
                     </div>
-                    <div class="itinerary-emoji-box right">🍽️</div>
+                    <div class="itinerary-emoji-box">🍽️</div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content right">
+                        <h3>¡A Bailar!</h3>
+                        <div class="itinerary-time">20:00 HRS</div>
+                        <p>Abre la pista de baile. ¡Queremos ver tus mejores pasos toda la noche!</p>
+                    </div>
+                    <div class="itinerary-emoji-box right">💃</div>
                 </div>
             </div>
         </div>
@@ -874,7 +897,7 @@ END:VCALENDAR`;
         function confirmarWhatsApp(destinatario) {
             const urlParams = new URLSearchParams(window.location.search);
             const nombreInvitado = urlParams.get('invitado') || 'Invitado Especial';
-            const numCelular = (destinatario === 'Marlene') ? '52XXXXXXXXXX' : '523312671008'; 
+            const numCelular = (destinatario === 'Marlene') ? '523314569558' : '523312671008'; 
             const mensaje = `¡Hola ${destinatario}! Confirmo con muchísima alegría mi asistencia a su boda este próximo 09 de Octubre de 2026. Firmado: ${nombreInvitado}. ✨🤵🏻‍♂️👰🏻‍♀️`;
             window.open(`https://wa.me/${numCelular}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
